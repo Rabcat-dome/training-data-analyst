@@ -182,6 +182,12 @@ def main():
                                  # the same random data
 
     simulated_temp = 10 + random.random() * 20
+    simulated_state = 1
+    simulated_amp = random.uniform(2,3)
+    simulated_noise = random.uniform(45,55)
+    simulated_vib = random.uniform(1.12,1.55)
+    simulated_humid = random.randint(55,69)
+    simulated_motor = random.uniform(5.0,6.0)
 
     if random.random() > 0.5:
         temperature_trend = +1     # temps will slowly rise
@@ -192,7 +198,7 @@ def main():
     for i in range(1, args.num_messages + 1):
 
         simulated_temp = simulated_temp + temperature_trend * random.normalvariate(0.01,0.005)
-        payload = {"timestamp": int(time.time()), "device": args.device_id, "temperature": simulated_temp}
+        payload = {"timestamp": int(time.time()), "device": args.device_id, "temperature": simulated_temp,"state":simulated_state,"allamp":simulated_amp,"noise":simulated_noise,"vibration":simulated_vib,"humid":simulated_humid,"motorv":simulated_motor}
         print('Publishing message {} of {}: \'{}\''.format(
                 i, args.num_messages, payload))
         jsonpayload =  json.dumps(payload,indent=4)
